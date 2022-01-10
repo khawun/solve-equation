@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+   <style>
+       *{
+           margin: 0px;
+           padding: 0px;
+           box-sizing: border-box;
+       }
+       body{
+           margin: 0px;
+           padding: 0px;
+           background-image:url(photo/mathcad.png);
+       }
+       .main> .enter_question{
+            position: absolute;
+           background:rgba(0,0,0,0.5);
+           top:50%;
+           left: 50%;
+           transform: translate(-50%,-50%);
+           height:auto;
+           padding: 60px 60px;
+       }
+       .main> div> h1{
+           border-bottom: 2px solid blueviolet;
+           text-transform: uppercase;
+           letter-spacing: 1.5px;
+           font-size: 30px;
+           text-align: center;
+           padding-bottom: 10px;
+           color: white;
+           margin-top: -15px;
+       }
+       .main> div> h2{
+           text-align: center;
+           margin-top: 15px;
+           color: white;
+       }
+
+        .main> div> form> .field_input{
+            display: flex;
+           font-size: 20px;
+           justify-content: center;
+           align-items: center;
+           margin-top:17px;
+       }
+       .main> div> form> .field_input input{
+            width:80px;
+            padding: 5px 0px;
+            border:none;
+            font-size: 20px;
+            border-radius:5px;
+            margin-right: 5px;
+            margin-top: 10px; 
+       }
+       .main> div> form> .field_input h2{
+            color: white;
+       }
+       .main> div> form> .field_input> h2#c{
+           margin-top: 5px;
+       }
+       .main> div> form> .field_input> input:focus{
+           border: none;
+           font-size: 22px;
+           color: white;
+           background:rgba(0,0,0,0.5);
+           text-align: center;
+       }
+       .main> div> form> .field_input> input::placeholder{
+           text-align: center;
+           font-size: 15px;
+       }
+       .main> div> form> button{
+           position: absolute;
+           top:90%;
+           left: 50%;
+           transform: translate(-50%,-50%);
+           font-size: 15px;
+           padding: 5px 5px;
+           border-radius:8px;
+           box-shadow:2px 2px 2px 2px;
+           cursor: pointer;
+           background-color: turquoise;
+       }
+    
+       /* css show_answer--------------------------------------------------------------------------------*/
+       .main> .show_answer{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            background:rgba(0,0,0,0.5);
+            width: 400px;
+            height: 70vh;
+            visibility: hidden;
+       }
+       .main> .show_answer> p{
+           text-align: center;
+           padding: 20px 5px;
+           color: white;
+           font-size: 20px;
+       }
+       .main> .show_answer> p.delta{
+           margin-top: 30px;
+       }
+       .main> .show_answer> a{
+           margin-left:40%;
+           padding: 7px 20px;
+           cursor: pointer;
+           margin-top: 25px;
+           border-radius: 7px;
+           background-color: rgb(30, 255, 0);
+           box-shadow: 2px 2px 2px 2px;
+           text-decoration: none;
+           transition: 1s;
+       }
+       .main> .show_answer> a> button{
+           border: none;
+           color: white;
+           background-color: rgb(0, 255, 64);
+           font-size: 20px;
+           cursor: pointer;
+       }
+       .main> .show_answer> a:active{
+           transform: scale(0.5);
+       }
+       .main> .show_answer.agen{
+           visibility:visible;
+       }
+   </style>
+</dead>
+<body>
+    <!--Geate app for solve Second degree equation-->
+    <div class="main">
+        <div class="enter_question">
+        <h1>App solve equation</h1>
+        <h2>Second degree equation ax<sup>2</sup>+bx+c=0</h2>
+        <form>
+            <div class="field_input">
+                <input type="text"name="a"class="a"id="value_a"placeholder="enter value">
+                <h2>x<sup>2</sup></h2>
+                <input type="text"class="b"name="b"id="value_b"placeholder="enter value">
+                <h2 id="c">x+</h2>
+                <input type="text"class="c"name="c"id="value_c"placeholder="enter value">
+            </div>
+            <button type="submit"class="submit">Show answer</button>
+        </form>
+        </div>
+        <div class="show_answer">
+            <p class="delta"></p>
+            <p class="x1"></p>
+            <p class="x2"></p>
+            <a href="solve_equation.html"><button>Back</button></a>
+        </div>
+    </div>
+    <script>
+        const btn=document.querySelector(".submit");
+        btn.addEventListener("click",function(e){
+            e.preventDefault();
+            const alert=document.querySelector(".show_answer");
+            document.querySelector(".enter_question").style.display="none";
+            alert.classList.add("agen");
+            let a=document.querySelector(".a").value.trim();
+            let b=document.querySelector(".b").value.trim();
+            let c=document.querySelector(".c").value.trim();
+            if(a===""&&b===""&&c==="")
+                {
+                    document.querySelector(".delta").innerHTML="RE-enter a value!";
+                    document.querySelector(".x1").innerHTML="RE-enter b value!";
+                    document.querySelector(".x2").innerHTML="RE-enter c value!";
+                    document.querySelector(".delta").style.color="red";
+                    document.querySelector(".x1").style.color="red";
+                    document.querySelector(".x2").style.color="red";
+                }
+            
+            else if(a===""&&b===""&&!(isNaN(c)))
+                    {
+                        document.querySelector(".delta").innerHTML="Re-enter a value!";
+                        document.querySelector(".x2").innerHTML="You have entered the value c="+c;
+                        document.querySelector(".x1").innerHTML="RE-enter b value!";
+                        document.querySelector(".delta").style.color="red";
+                        document.querySelector(".x1").style.color="red";
+                    }
+            else if(b===""&&c===""&&!(isNaN(a)))
+                {
+                    document.querySelector(".x1").innerHTML="RE-enter b value!";
+                    document.querySelector(".x2").innerHTML="RE-enter c value!";
+                    document.querySelector(".delta").innerHTML="You have entered the value a="+a;
+                    document.querySelector(".x1").style.color="red";
+                    document.querySelector(".x2").style.color="red";
+                }
+            else if(a===""&&c===""&&!(isNaN(b)))
+                {
+                    document.querySelector(".delta").innerHTML="RE-enter a value!";
+                    document.querySelector(".x2").innerHTML="RE-enter c value!";
+                    document.querySelector(".x1").innerHTML="You have entered the value b="+b;
+                    document.querySelector(".delta").style.color="red";
+                    document.querySelector(".x2").style.color="red";
+                }
+            else if(a===""&!(isNaN(b))&&!(isNaN(c)))
+                {
+                    document.querySelector(".delta").innerHTML="RE-enter a value!";
+                    document.querySelector(".x2").innerHTML="You have entered the value c="+c;
+                    document.querySelector(".x1").innerHTML="You have entered the value b="+b;
+                    document.querySelector(".delta").style.color="red";
+                }
+                
+            else if(b===""&!(isNaN(a))&&!(isNaN(c)))
+                {
+                    document.querySelector(".x1").innerHTML="RE-enter b value!";
+                    document.querySelector(".delta").innerHTML="You have entered the value a="+a;
+                    document.querySelector(".x2").innerHTML="You have entered the value c="+c;
+                    document.querySelector(".x1").style.color="red";
+                }
+            else if(c===""&&!(isNaN(a))&&!(isNaN(b)))
+                {
+                    document.querySelector(".x2").innerHTML="RE-enter c value!";
+                    document.querySelector(".delta").innerHTML="You have entered the value a="+a;
+                    document.querySelector(".x1").innerHTML="You have entered the value b="+b;
+                    document.querySelector(".x2").style.color="red";
+                }
+            else if(isNaN(a)&&isNaN(b)&&isNaN(c))
+                {
+                    document.querySelector(".delta").innerHTML="all value must be a number enter your again";
+                    document.querySelector(".delta").style.color="red";
+                }
+            else if(isNaN(a)&&!(isNaN(b))&&!(isNaN(c)))
+                {
+                    document.querySelector(".delta").innerHTML="value a must be a number";
+                    document.querySelector(".delta").style.color="red";
+                }
+            else if(isNaN(b)&&!(isNaN(a))&&!(isNaN(c)))
+                {
+                    document.querySelector(".delta").innerHTML="value b must be a number";
+                    document.querySelector(".delta").style.color="red";
+                }
+            else if(isNaN(c)&&!(isNaN(a))&&!(isNaN(b)))
+                {
+                    document.querySelector(".delta").innerHTML="value c must be a number";
+                    document.querySelector(".delta").style.color="red";
+                }
+             else
+                {
+                    const delta=Math.pow(b,2)-4*a*c;
+                    if(delta>=0){
+                        //tho differnt root equations are numbers
+                        let x1=(-b+Math.sqrt(delta))/2*a;
+                        let x2=(-b-Math.sqrt(delta))/2*a;
+                        document.querySelector(".delta").innerHTML="delta="+delta;
+                        document.querySelector(".x1").innerHTML="x<sub>1</sub>="+x1;
+                        document.querySelector(".x2").innerHTML="x<sub>2</sub>="+x2;
+                    }
+                    else{
+                        //"Equation has roote in complex number";
+                        let real=-b/2*a;
+                        let symbols=Math.sqrt(Math.abs(delta))/2*a;
+                        document.querySelector(".delta").innerHTML="delta="+delta;
+                        document.querySelector(".x1").innerHTML="x<sub>1</sub>="+real+"+"+symbols.toFixed(1)+"i";
+                        document.querySelector(".x2").innerHTML="x<sub>2</sub>="+real+"-"+symbols.toFixed(1)+"i";
+                    }
+                }
+        });
+    </script>
+</body>
+</html>
